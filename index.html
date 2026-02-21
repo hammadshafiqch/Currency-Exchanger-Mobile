@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Optimized for Redmi Note 11 (1080x2400, 400dp approx) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>NEO | Currency · mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Simplified background for mobile performance -->
+    <div class="cyber-grid"></div>
+    <div class="scan-line"></div>
+
+    <!-- Mobile-optimized app wrapper (no fixed sidebar) -->
+    <div class="app">
+        <!-- Top bar with logo & theme toggle (mobile friendly) -->
+        <div class="mobile-top-bar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <span class="logo-text">NEO<span class="accent">.</span></span>
+            </div>
+            <button class="mobile-theme-btn" id="mobileThemeToggle" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+
+        <!-- Main Content (full width) -->
+        <main class="main">
+            <!-- Header with date and market status -->
+            <header class="header">
+                <div class="header-left">
+                    <h1>Exchange</h1>
+                    <div class="live-badge">
+                        <span class="live-dot"></span>
+                        LIVE
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="market-status">
+                        <span class="status-label">MARKET</span>
+                        <span class="status-value open">OPEN</span>
+                    </div>
+                    <div class="date-display">
+                        <i class="far fa-calendar"></i>
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stats Cards (scrollable row on mobile) -->
+            <div class="stats-scroll">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">EUR/USD</span>
+                            <span class="stat-value" id="eurUsdRate">1.0923</span>
+                            <span class="stat-change positive">+0.23%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">GBP/USD</span>
+                            <span class="stat-value" id="gbpUsdRate">1.2845</span>
+                            <span class="stat-change negative">-0.12%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">USD/JPY</span>
+                            <span class="stat-value" id="usdJpyRate">151.23</span>
+                            <span class="stat-change positive">+0.45%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-crown"></i></div>
+                        <div class="stat-info">
+                            <span class="stat-label">BTC/USD</span>
+                            <span class="stat-value" id="btcUsdRate">43,256</span>
+                            <span class="stat-change positive">+2.34%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Converter Card (compact for mobile) -->
+            <div class="converter-card">
+                <div class="card-header">
+                    <h3>Convert Currency</h3>
+                    <div class="card-actions"></div>
+                </div>
+
+                <div class="converter-body">
+                    <!-- Amount Input -->
+                    <div class="input-group">
+                        <label class="input-label">Amount</label>
+                        <div class="amount-input-wrapper">
+                            <input type="number" id="amount" value="1000.00" min="0" step="0.01" class="amount-input">
+                            <div class="currency-badge" id="fromCurrencyBadge">PKR</div>
+                        </div>
+                    </div>
+
+                    <!-- Currency Selection (vertical on mobile, but kept as row with small gaps) -->
+                    <div class="currency-group">
+                        <div class="currency-box">
+                            <span class="box-label">From</span>
+                            <div class="currency-selector" id="fromSelector">
+                                <div class="selected-currency">
+                                    <span class="currency-flag">🇵🇰</span>
+                                    <span class="currency-code">PKR</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <select id="fromCurrency" class="hidden-select"></select>
+                            </div>
+                        </div>
+
+                        <button class="swap-button" id="swapBtn">
+                            <i class="fas fa-arrow-right-arrow-left"></i>
+                        </button>
+
+                        <div class="currency-box">
+                            <span class="box-label">To</span>
+                            <div class="currency-selector" id="toSelector">
+                                <div class="selected-currency">
+                                    <span class="currency-flag">🇸🇦</span>
+                                    <span class="currency-code">SAR</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <select id="toCurrency" class="hidden-select"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rate Info -->
+                    <div class="rate-card">
+                        <div class="rate-info">
+                            <span class="rate-text" id="rateDisplay">1 PKR = 0.0135 SAR</span>
+                            <span class="rate-update"><i class="far fa-clock"></i><span id="updateTime">Updated now</span></span>
+                        </div>
+                        <div class="rate-chart-preview">
+                            <span class="sparkline">▁▂▃▄▅▆▇█▇▆▅▄▃▂▁</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-group">
+                        <button class="convert-btn" id="convertBtn">
+                            <span>Convert Now</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Result -->
+                    <div class="result-container" id="result">
+                        <div class="result-left">
+                            <span class="result-label">You receive</span>
+                            <div class="result-amount" id="convertedAmount">13.50 SAR</div>
+                        </div>
+                        <div class="result-right">
+                            <div class="fee-info"><i class="far fa-question-circle"></i><span>No fees</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Section (full width) -->
+            <div class="history-section">
+                <div class="history-header">
+                    <h4>Recent Activity</h4>
+                    <button class="view-all" id="clearHistoryBtn">Clear All <i class="fas fa-trash"></i></button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <div class="empty-history">No conversions yet</div>
+                </div>
+            </div>
+
+            <!-- Bottom padding for comfortable thumb reach -->
+            <div class="bottom-spacer"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
